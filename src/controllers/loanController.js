@@ -15,6 +15,18 @@ export const LoanController = {
     }
   },
 
+  async returnBook(req, res) {
+    try {
+      const loan = await LoanModel.returnLoan(req.params.id);
+      res.json({
+        message: 'Buku berhasil dikembalikan.',
+        data: loan
+      });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+
   async getLoans(req, res) {
     try {
       const loans = await LoanModel.getAllLoans();
